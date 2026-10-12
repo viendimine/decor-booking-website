@@ -1,0 +1,45 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ BRAND }} | Birthday decor you can book online{% endblock %}</title>
+<meta name="description" content="Book balloon ring arches, neon signs and themed birthday decor online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=Yellowtail&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="{% url 'index' %}">{{ BRAND }}</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false">Menu</button>
+    <nav class="nav" id="nav">
+      <a href="{% url 'gallery' %}">Past work</a>
+      <a href="{% url 'index' %}#packages">Setups and prices</a>
+      <a href="{% url 'index' %}#how">How it works</a>
+      <a class="btn gold small" href="{% url 'book' %}">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<main>{% block content %}{% endblock %}</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div>
+      <p class="brand">{{ BRAND }}</p>
+      <p>Birthday decor, set up at your index or venue.</p>
+    </div>
+    <div>
+      <p><a href="https://wa.me/{{ WHATSAPP }}">WhatsApp {{ PHONE_DISPLAY }}</a></p>
+      <p><a href="{{ INSTAGRAM }}">Instagram</a></p>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/{{ WHATSAPP }}" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+<script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

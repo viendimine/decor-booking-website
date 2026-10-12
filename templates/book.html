@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Book your date | {{ BRAND }}{% endblock %}
+{% block content %}
+<section class="section page-head">
+  <div class="wrap book-grid">
+    <div>
+      <h1>Book your date</h1>
+      <p class="intro">Fill this in and we'll confirm on WhatsApp. Nothing is charged online.</p>
+      <form method="post" class="form" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}<p class="err">{{ form.non_field_errors }}</p>{% endif %}
+        <fieldset>
+          <legend>The party</legend>
+          {% include "_field.html" with field=form.package %}
+          <div class="two">
+            {% include "_field.html" with field=form.celebrant %}
+            {% include "_field.html" with field=form.event_date %}
+          </div>
+          {% include "_field.html" with field=form.ready_by %}
+          {% include "_field.html" with field=form.venue %}
+          {% include "_field.html" with field=form.theme_notes %}
+        </fieldset>
+        <fieldset>
+          <legend>Your details</legend>
+          <div class="two">
+            {% include "_field.html" with field=form.name %}
+            {% include "_field.html" with field=form.phone %}
+          </div>
+          {% include "_field.html" with field=form.email %}
+        </fieldset>
+        <button class="btn plum" type="submit">Send booking request</button>
+      </form>
+    </div>
+    <aside class="side">
+      <h2>What happens next</h2>
+      <p>We reply on WhatsApp, usually within a few hours, to confirm your date and share the final quote.</p>
+      <p>Need it sooner or want to talk it through?</p>
+      <p><a class="btn gold small" href="https://wa.me/{{ WHATSAPP }}">Chat on WhatsApp</a></p>
+    </aside>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>Birthday decor that turns your room into the party</h1>
+      <p class="lead">Balloon ring arches, neon signs and themed backdrops, set up at your home or venue. Pick a date and book in two minutes.</p>
+      <div class="actions">
+        <a class="btn gold" href="{% url 'book' %}">Book your date</a>
+        <a class="btn ghost" href="{% url 'gallery' %}">See past work</a>
+      </div>
+      <label class="try">Try a name on the sign
+        <input id="nameInput" maxlength="14" value="Daisy" autocomplete="off">
+      </label>
+    </div>
+    <div class="ring" id="ring" aria-hidden="true">
+      <div class="ring-core"></div>
+      <div class="neon"><span class="l1">Happy Birthday</span><span class="l2" id="neonName">Daisy</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Setups we've done</h2>
+    <p class="intro">Real parties, set up by our team. Tap a photo to see it larger.</p>
+    <div class="masonry lb">
+      {% for i in work %}{% include "_work.html" %}{% empty %}<p>Photos are coming soon.</p>{% endfor %}
+    </div>
+    <p class="more"><a class="btn plum" href="{% url 'gallery' %}">See all past work</a></p>
+  </div>
+</section>
+
+<section class="section tint" id="packages">
+  <div class="wrap">
+    <h2>Pick a starting point</h2>
+    <p class="intro">Every setup is customised to your colours, name and age. Prices are starting prices. We confirm the final quote on WhatsApp before anything is booked.</p>
+    <div class="pkgs">
+      {% for p in packages %}
+      <article class="pkg">
+        <div>
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.tagline }}</p>
+        </div>
+        <ul>{% for line in p.includes_list %}<li>{{ line }}</li>{% endfor %}</ul>
+        <div class="buy">
+          <p class="price">from ₹{{ p.price_from|floatformat:"0g" }}</p>
+          <a class="btn plum small" href="{% url 'book' %}?package={{ p.slug }}">Book this</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <h2>How booking works</h2>
+    <ol class="steps">
+      <li><span>1</span><h3>Send your details</h3><p>Party date, venue, and the colours or theme you want.</p></li>
+      <li><span>2</span><h3>We confirm on WhatsApp</h3><p>We check availability and share the final quote.</p></li>
+      <li><span>3</span><h3>We set up before the party</h3><p>Our team arrives early and has everything ready before your guests do.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Got a date in mind?</h2>
+    <a class="btn gold" href="{% url 'book' %}">Book your date</a>
+  </div>
+</section>
+
+<dialog id="lightbox"><img alt=""><button type="button" aria-label="Close">Close</button></dialog>
+{% endblock %}
